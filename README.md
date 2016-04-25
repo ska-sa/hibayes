@@ -1,3 +1,6 @@
+* auto-gen TOC:
+{:toc}
+
 # ledabayes
 
 MCMC model fitting for the global HI spectrum.
