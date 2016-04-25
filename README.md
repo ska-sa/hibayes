@@ -1,5 +1,3 @@
-:with_toc_data
-
 # ledabayes
 
 MCMC model fitting for the global HI spectrum.
@@ -12,18 +10,44 @@ feel free to plug in your own sampler, MCMC or otherwise.
 
 ## Overview
 
-- Uses a fully bayesian framework to fit models to the measured global HI spectrum
-- Fully bayesian = parameter estimation AND model selection via the evidence (Occam's razor quantified)
-- This is NOT maximum likelihood or expensive least squares etc. - rather, use sampler to explore full posterior probability distribution of parameters and unmask degeneracies, multimodalities, correlations, wings, skirts, etc. between parameters
-- Sampler is MultiNEST (Feroz et al.) which is geared towards calculating the evidence, but gives the posterior samples 'for free' (higher density of samples <-> higher probability)
-- Calculating evidence via nested sampling is expensive compared to vanilla MCMC, but perfectly doable for < 30 parameters, say
-- Code is in python + MPI and takes O(minutes) to run on laptop depending on model complexity
-- Output for given model run is a bayesian evidence value plus error and a 'chain' of posterior samples
-- Use evidence to select winning model, then examine corresponding triangle plot and derive reconstructed model
-- Current models are polynomial foreground + gaussian HI; eventually connect to physical; any possible
-- Noise supplied by Danny rather than using equation in slides; assumed gaussian (-> gaussian likelihood); errors propagated automatically by the sampling process
-- Of course there's an inescapable choice of priors on parameters (and models!), but evidence quantifies this
-- Easy to add a joint likelihood over multiple data sets/expts, or incorporate models for telescope systematics
+- Uses a fully bayesian framework to fit models to the measured global
+  HI spectrum. Fully bayesian here means parameter estimation **and**
+  model selection via the bayesian evidence (Occam's razor
+  quantified). See
+  e.g. [Mackay 2003](http://www.inference.phy.cam.ac.uk/mackay/itila/book.html).
+- Note that the algorithm is **not** maximum likelihood or an
+  expensive least squares (though the likelihood function could be
+  used for either of these). Rather, the sampler is used to explore
+  the full posterior probability distribution of the model parameters
+  and so unmask any degeneracies, multimodalities, correlations,
+  wings, skirts, etc. between parameters
+- For sampling we have used ```multinest```, though any nested or MCMC
+  sampler could be used. ```multinest``` has the advantage of offering
+  the evidence as well as the posterior samples (a higher density of
+  samples corresponding to a higher probability). Calculating the
+  evidence is intrinsically expensive compared to 'vanilla' MCMC, but
+  is perfectly doable for problems, such as this one, that have a small
+  (< 30, say) number of parameters.
+- The code is in python plus MPI and takes a few minutes to run on a
+  laptop, runtime depending mainly on the model complexity
+  (i.e. number of parameters).
+- The output for a given model is a bayesian evidence (plus
+  uncertainty) and a 'chain' of posterior samples.
+- The *modus operandi* is to use the evidence to select the winning
+  model from a field of single-multinest-run competitors, then
+  examining the corresponding triangle plot (the 'final answer') and
+  deriving reconstructed and residual spectra.
+- Currently implemented models are polynomial foregrounds and a
+  gaussian empirical ```hi``` decrement, but any other parametric
+  model can be coded in straightforwardly (e.g. simulated/physical
+  parameters).
+- Note that the form of the likelihood function assumes gaussian
+  uncertainties on the input data, the uncertainties being propagated
+  automatically by the sampling process.
+- Note that there is an inescapable choice of priors on parameters
+  (and models), but the evidence quantifies this.
+- It is easy to add a joint likelihood over multiple data
+  sets/experiments or incorporate models for telescope systematics.
 
 ## Software requirements
 
