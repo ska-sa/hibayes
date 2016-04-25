@@ -10,45 +10,47 @@ feel free to plug in your own sampler, MCMC or otherwise.
 
 ## Overview
 
-- Uses a fully-bayesian framework to fit a model to the measured
-  global HI spectrum. 'Fully bayesian' here means parameter estimation
-  **and** model selection via the bayesian evidence (Occam's razor
-  quantified). See
+- **Framework** Uses a fully-bayesian framework to fit a model to the
+  measured global HI spectrum. 'Fully bayesian' here means parameter
+  estimation **and** model selection via the bayesian evidence
+  (Occam's razor quantified). See
   e.g. [Mackay 2003](http://www.inference.phy.cam.ac.uk/mackay/itila/book.html).
-- Currently implemented models are polynomial foregrounds and a
-  (empirical) gaussian HI decrement, but any other parametric model
-  can be coded-in straightforwardly (e.g. simulated/physical
+- **Models** Currently implemented models are polynomial foregrounds
+  and a (empirical) gaussian HI decrement, but any other parametric
+  model can be coded-in straightforwardly (e.g. simulated/physical
   parameters).
-- The (gaussian) form of the likelihood function assumes gaussian
-  uncertainties on the input data, those uncertainties being
-  propagated automatically by the sampling process.
-- For sampling we have used ```multinest```, though any nested or MCMC
-  sampler could be used. ```multinest``` has the advantage of offering
-  the evidence as well as the posterior samples (a higher density of
-  samples corresponding to a higher probability). Calculating the
-  evidence is intrinsically expensive compared to 'vanilla' MCMC, but
-  is perfectly doable for problems --- such as this one --- that have
-  a small (< 30, say) number of parameters.
-- The output for a given model is the bayesian evidence (plus
-  uncertainty) and a 'chain' of posterior samples.
-- The *modus operandi* is to use the evidence to select the winning
-  model from a field of single-multinest-run competitors, then to
-  examine the corresponding triangle plot (the 'final answer') and to
-  derive reconstructed and residual spectra.
-- Note also that there is an inescapable choice of priors on
-  parameters (and models), but the evidence quantifies this.
-- The code is in python plus MPI and takes a few minutes to run on a
-  laptop, runtime depending mainly on the model complexity
+- **Uncertainties** The (gaussian) form of the likelihood function
+  assumes gaussian uncertainties on the input data, those
+  uncertainties being propagated automatically by the sampling
+  process.
+- **Samplers** For sampling we have used ```multinest```, though any
+  nested or MCMC sampler could be used. ```multinest``` has the
+  advantage of offering the evidence as well as the posterior samples
+  (a higher density of samples corresponding to a higher
+  probability). Calculating the evidence is intrinsically expensive
+  compared to 'vanilla' MCMC, but is perfectly doable for problems ---
+  such as this one --- that have a small (< 30, say) number of
+  parameters.
+- **Output** The output for a given model is the bayesian evidence
+  (plus uncertainty) and a 'chain' of posterior samples.
+- **Modus operandi** The *modus operandi* is to use the evidence to
+  select the winning model from a field of single-multinest-run
+  competitors, then to examine the corresponding triangle plot (the
+  'final answer') and to derive reconstructed and residual spectra.
+- **Priors** Note also that there is an inescapable choice of priors
+  on parameters (and models), but the evidence quantifies this.
+- **Runtime** The code is in python plus MPI and takes a few minutes
+  to run on a laptop, runtime depending mainly on the model complexity
   (i.e. number of parameters).
-- Note that the algorithm is **not** maximum likelihood or an
-  expensive least squares (though the likelihood function could be
-  used for either of these). Rather, the sampler is used to explore
-  the full posterior probability distribution of the model parameters
-  and so unmask any degeneracies, multimodalities, correlations,
-  wings, skirts, etc. of/between parameters.
-- It is easy to add in the future a joint likelihood over multiple
-  data sets/experiments or incorporate models for telescope
-  systematics.
+- **What hibayes isn't** Note that the algorithm is **not** maximum
+  likelihood or an expensive least squares (though the likelihood
+  function could be used for either of these). Rather, the sampler is
+  used to explore the full posterior probability distribution of the
+  model parameters and so unmask any degeneracies, multimodalities,
+  correlations, wings, skirts, etc. of/between parameters.
+- **Joint analysis** It is easy to add in the future a joint
+  likelihood over multiple data sets/experiments or incorporate models
+  for telescope systematics.
 
 ## Software requirements
 
