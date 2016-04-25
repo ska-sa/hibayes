@@ -117,13 +117,13 @@ error bars (see code for details):
 ```./hi_recon.py examples/1_simulated_data/config.ini```
 
 
-## Supplied examples (see Bernardi et al. 2016
+## Supplied examples (see Bernardi et al. 2016)
 
 1. Simulation
 
 2. LEDA data
 
-## Citation
+## Citations
 
 Use of this code should be cited as Zwart et al. 2016:
 
