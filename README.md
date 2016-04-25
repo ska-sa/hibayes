@@ -1,5 +1,4 @@
-* auto-gen TOC:
-{:toc}
+:with_toc_data
 
 # ledabayes
 
