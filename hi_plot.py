@@ -3,9 +3,10 @@
 """
 # hi_plot.py
 
-
 Jonathan Zwart
-September 2014
+Danny Price
+Gianni Bernardi
+April 2016
 
 Usage:
 
