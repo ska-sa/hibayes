@@ -6,7 +6,9 @@
 Reconstruct the (measured) spectrum from Multinest output
 
 Jonathan Zwart
-September 2015
+Danny Price
+Gianni Bernardi
+April 2016
 
 Usage:
 
@@ -63,9 +65,6 @@ def main():
     # Set up the experiment
     #expt=countModel(modelFamily,nlaws,settingsf,dataset,floatNoise)
 
-    f = '%spost_equal_weights.dat' % rp["outstem"]
-    f = os.path.join(rp["outdir"], f)
-
     if rp["ledaSpec"] is None:
         data, freqs = generate_simulated_data(rp)
     else:
@@ -74,11 +73,13 @@ def main():
 
     nfreqs = len(freqs)
 
-
     # Load equally-weighted posterior samples
+    f = '%spost_equal_weights.dat' % rp["outstem"]
+    f = os.path.join(rp["outdir"], f)
     x = numpy.genfromtxt(f)
     nsamp = x.shape[0]
-    ncols = x.shape[1]  # The fifth [seventh] column is the posterior value
+    ncols = x.shape[1]  # The final column is the posterior value
+
     # There must be a better way, but:
     z = numpy.zeros((nsamp, ncols - 1 + nfreqs))
     z[:, :-(nfreqs - 1)] = x
@@ -86,15 +87,14 @@ def main():
     z[:, -1] = z[:, ncols - 1]  # Copy...
     z[:, ncols - 1] = 0.0  # ...and blank
 
-    # Fetch best-fit parameters and calculate best-fit line
+    # Fetch 'best-fit' parameters and calculate 'best-fit' line
     ana = pymultinest.analyse.Analyzer(ncols - 1, \
-                                       outputfiles_basename=os.path.join(rp["outdir"], rp["outstem"]))
+                                       outputfiles_basename=os.path.join(rp["outdir"],rp["outstem"]))
     drawml = ana.get_best_fit()['parameters']
 
-    summf = os.path.join(rp["outdir"], '1-summary.txt')
-    print summf,ncols
-    print numpy.genfromtxt(summf),numpy.genfromtxt(summf).shape
-    summary = numpy.genfromtxt(summf)[-1, :]
+    summf = os.path.join(rp["outdir"], '%ssummary.txt'%rp["outstem"])
+    # skip_header mitigates irregularly-shaped table:
+    summary=numpy.genfromtxt(summf,skip_header=1)[:]
     drawmap = summary[-(ncols + 1):-2]
 
     if False:
@@ -104,13 +104,13 @@ def main():
     # Convert drawmap into correct units etc.
     ymap = numpy.zeros(len(freqs))
     for ifreq, freq in enumerate(freqs):
-        ymap[ifreq] = func(freq, drawmap=drawmap, fr_1=nu_1, subtractValue=data[ifreq])
+        ymap[ifreq] = func(freq, drawmap=drawmap,fr_1=nu_1, subtractValue=data[ifreq])
     #ymap=ff(freqs,drawmap=drawmap,fr_1=nu_1)
 
     for isamp in xrange(nsamp):
         #z[isamp,ncols-1:]=ff(freqs,drawmap=z[isamp,:],fr_1=nu_1)
         for ifreq, freq in enumerate(freqs):
-            z[isamp, ncols - 1 + ifreq] = func(freq, drawmap=z[isamp, :], fr_1=nu_1, subtractValue=data[ifreq])
+            z[isamp, ncols - 1 + ifreq] = func(freq, drawmap=z[isamp, :],fr_1=nu_1, subtractValue=data[ifreq])
 
     # Blanking, 0.0 -> NaN
     z[numpy.where(z == 0.0)] = 'NaN'
