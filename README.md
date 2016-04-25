@@ -27,19 +27,19 @@ otherwise.
 
 - python 2.7.x
 - MPI (optional)
-- [http://ccpforge.cse.rl.ac.uk/gf/project/multinest](multinest)
-- [http://johannesbuchner.github.io/PyMultiNest](pymultinest)
+- [multinest](http://ccpforge.cse.rl.ac.uk/gf/project/multinest)
+- [pymultinest](http://johannesbuchner.github.io/PyMultiNest)
 
 ## Install
 
-1. Fetch and install multinest, enabling MPI for an optional ~ NPROCS
+1. Fetch and install multinest, enabling MPI for an optional ~ ```NPROCS```
 speed-up (see below). Check the multinest examples run.
 
 2. Install pymultinest:
 
 ```pip install pymultinest```
 
-Don't forget to set the (DY)LD_LIBRARY_PATH environment! No output
+Don't forget to set the ```(DY)LD_LIBRARY_PATH``` environment! No output
 from the following command indicates success:
 
 ```python -c 'import pymultinest'```
