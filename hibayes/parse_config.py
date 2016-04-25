@@ -32,7 +32,7 @@ def parse_config(filename):
     confdict["nc_fit"]  = config.getint("fit", "n_poly")
     confdict["outdir"]  = config.get("file", "outdir")
     confdict["logfile"] = config.get("file", "logfile")
-    confdict["comment"] = config.get("misc", "comment")
+    #confdict["comment"] = config.get("misc", "comment")
 
     #-------------------------------------------------------------------------------
 
