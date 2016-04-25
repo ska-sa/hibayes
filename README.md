@@ -60,18 +60,18 @@ feel free to plug in your own sampler, MCMC or otherwise.
 ## Install
 
 1. Fetch and install multinest, enabling MPI for an optional ~ ```NPROCS```
-speed-up (see below). Check the multinest examples run.
+speed-up (see below). Check the multinest examples run OK.
 
 2. Install pymultinest:
 
 ```pip install pymultinest```
 
-Don't forget to set the ```(DY)LD_LIBRARY_PATH``` environment! No output
+Don't forget to set the ```(DY)LD_LIBRARY_PATH``` environment. No output
 from the following command indicates success:
 
 ```python -c 'import pymultinest'```
 
-Then check the pymultinest examples run.
+Then check the pymultinest examples run OK.
 
 3. Don't forget to
 
@@ -89,21 +89,23 @@ MPI typically takes a few minutes on a laptop). Without MPI, just run
 
 ```./hi_multinest.py examples/1_simulated_data/config.ini```
 
-The Multinest output goes to ```examples/1_simulated_data/output/```,
-roughly as follows (see Multinest README for more info):
+The ```multinest``` output goes to ```examples/1_simulated_data/output/```,
+roughly as follows (see ```multinest``` README for more info; the
+outstem ```1-``` can be set in ```config.ini```):
 
-- ```1-stats.dat``` is written out every so often; the top line contains the
-  evidence plus uncertainty, with the (optional)
+- ```1-stats.dat``` is written out every ```updInt``` iterations; the
+  top line contains the evidence plus uncertainty, with the (optional)
   importance-nested-sampling (INS) evidence on line 2. Mean, ML and
-  MAP parameter estimates follow. Caution - be wary of
-  overinterpreting these averages and point estimates without
-  eyeballing the full posteriors!
+  MAP parameter estimates follow. Caution --- be wary of
+  overinterpreting these averages and point estimates without fully
+  eyeballing the posteriors!
 - ```1-post_equal_weights.dat```, populated once the multinest run is
   completed, contains the equally-weighted posterior samples, the last
   column being the value of the posterior for each sample. This file
   is used for plotting and reconstruction.
 - ```1-summary.txt``` is used for reconstruction.
-- ```1-ev.dat``` and ```1-phys_live.points``` are written out as sampling proceeds.
+- ```1-ev.dat``` and ```1-phys_live.points``` are written out as
+  sampling proceeds.
 - ```1-IS.*``` are the corresponding files for INS.
 - ```1-resume.txt``` for checkpointing.
 - ```1-.txt``` for analysis in [cosmomc](http://cosmologist.info/cosmomc).
@@ -116,17 +118,21 @@ Alternatively use e.g. [corner](https://github.com/dfm/corner.py):
 
 ```pip install corner```
 
-And generate a text file containing a MAP-centred reconstruction with
-error bars (see code for details):
+And generate a text file ```recon_stats.txt``` containing a
+MAP-centred reconstruction with error bars (see code for details):
 
 ```./hi_recon.py examples/1_simulated_data/config.ini```
 
+The file ```recon_raw.txt``` contains the distributions of
+reconstructed spectra and has dimensions ```nsamp x nfreqs```.
 
 ## Supplied examples (see Bernardi et al. 2016)
 
 1. Simulation
 
 2. LEDA data
+
+3...
 
 ## Citations
 
