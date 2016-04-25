@@ -111,7 +111,8 @@ archivePrefix = "ascl",
 eprint = {xxxx.xxx},
 adsurl = {http://adsabs.harvard.edu/abs/xxxx.xxx},
 adsnote = {Provided by the SAO/NASA Astrophysics Data System}
-}```
+}
+```
 
 The algorithm, applied to both simulated and LEDA data, is described
 in Bernardi et al. 2016:
