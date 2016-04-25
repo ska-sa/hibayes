@@ -1,6 +1,6 @@
-# ledabayes
+# hibayes
 
-MCMC model fitting for the global HI spectrum.
+Bayesian Monte-Carlo model fitting for the global HI spectrum.
 
 We provide a python framework for a fully Bayesian analysis of the
 global HI spectrum from the cosmic dawn. As written the code uses
@@ -20,7 +20,7 @@ feel free to plug in your own sampler, MCMC or otherwise.
   used for either of these). Rather, the sampler is used to explore
   the full posterior probability distribution of the model parameters
   and so unmask any degeneracies, multimodalities, correlations,
-  wings, skirts, etc. between parameters
+  wings, skirts, etc. between parameters.
 - For sampling we have used ```multinest```, though any nested or MCMC
   sampler could be used. ```multinest``` has the advantage of offering
   the evidence as well as the posterior samples (a higher density of
@@ -38,7 +38,7 @@ feel free to plug in your own sampler, MCMC or otherwise.
   examining the corresponding triangle plot (the 'final answer') and
   deriving reconstructed and residual spectra.
 - Currently implemented models are polynomial foregrounds and a
-  gaussian empirical ```hi``` decrement, but any other parametric
+  gaussian empirical HI decrement, but any other parametric
   model can be coded in straightforwardly (e.g. simulated/physical
   parameters).
 - Note that the form of the likelihood function assumes gaussian
