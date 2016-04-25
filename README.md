@@ -4,9 +4,9 @@ MCMC model fitting for the global HI spectrum.
 
 We provide a python framework for a fully Bayesian analysis of the
 global HI spectrum from the cosmic dawn. As written the code uses
-multinest for sampling in order to obtain the evidence as well as the
-posterior, but feel free to plug in your own sampler, MCMC or
-otherwise.
+[(py)multinest](http://ccpforge.cse.rl.ac.uk/gf/project/multinest) for
+sampling in order to obtain the evidence as well as the posterior, but
+feel free to plug in your own sampler, MCMC or otherwise.
 
 ## Overview
 
@@ -89,5 +89,35 @@ And generate a text file containing a MAP-centred reconstruction with
 error bars (see code for details):
 
 ```./hi_recon.py examples/1_simulated_data/config.ini```
+
+
+## Supplied examples
+
+1. Simulation (Bernardi et al. 2016)
+
+2. LEDA data (Bernardi et al. 2016)
+
+## Citation
+
+Use of this code should be cited as Zwart et al. 2016:
+
+@misc{ascl_hibayes,
+author = {{Zwart}, J.~T.~L. and others},
+title = "{HIBAYES: Global 21-cm Bayesian Monte-Carlo Model Fitting}",
+howpublished = {Astrophysics Source Code Library},
+year = 2016,
+month = mar,
+archivePrefix = "ascl",
+eprint = {xxxx.xxx},
+adsurl = {http://adsabs.harvard.edu/abs/xxxx.xxx},
+adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+The algorithm, applied to both simulated and LEDA data, is described
+in Bernardi et al. 2016:
+
+(bibtex here)
+
+
 
 
