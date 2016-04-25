@@ -66,8 +66,9 @@ speed-up (see below). Check the multinest examples run OK.
 
 ```pip install pymultinest```
 
-Don't forget to set the ```(DY)LD_LIBRARY_PATH``` environment. No output
-from the following command indicates success:
+Don't forget to set the ```(DY)LD_LIBRARY_PATH``` environment (see
+[here](http://johannesbuchner.github.io/PyMultiNest/install.html#running-some-code)). No
+output from the following command indicates success:
 
 ```python -c 'import pymultinest'```
 
