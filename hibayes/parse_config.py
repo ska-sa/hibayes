@@ -108,7 +108,7 @@ def parse_config(filename):
     confdict["max_iter"] = config.getint("multinest", "max_iter")
     confdict["evidence_tolerance"] = config.getfloat("multinest", "evidence_tolerance")
     confdict["mode_tolerance"] = config.getfloat("multinest", "mode_tolerance")
-    confdict["do_INS"] = config.getboolean("multinest", "do_ins")
+    confdict["do_ins"] = config.getboolean("multinest", "do_ins")
     confdict["multimodal"] = config.getboolean("multinest", "multimodal")
     confdict["outstem"] = config.get("multinest", "outstem")
 
