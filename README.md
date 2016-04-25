@@ -37,30 +37,30 @@ speed-up (see below). Check the multinest examples run.
 
 2. Install pymultinest:
 
-    ```pip install pymultinest```
+```pip install pymultinest```
 
 Don't forget to set the (DY)LD_LIBRARY_PATH environment! No output
 from the following command indicates success:
 
-    ```python -c 'import pymultinest'```
+```python -c 'import pymultinest'```
 
 Then check the pymultinest examples run.
 
 3. Don't forget to
 
-    ```chmod +x *py```
+```chmod +x *py```
 
 
 ## Usage
 
 From the project root directory,
 
-    ```mpiexec -n NPROCS ./hi_multinest.py examples/1_simulated_data/config.ini```
+```mpiexec -n NPROCS ./hi_multinest.py examples/1_simulated_data/config.ini```
 
 where ```NPROCS``` is the number of cores you wish to use (execution with
 MPI typically takes a few minutes on a laptop). Without MPI, just run
 
-    ```./hi_multinest.py examples/1_simulated_data/config.ini```
+```./hi_multinest.py examples/1_simulated_data/config.ini```
 
 The Multinest output goes to ```examples/1_simulated_data/output/```,
 roughly as follows (see Multinest README for more info):
@@ -83,11 +83,11 @@ roughly as follows (see Multinest README for more info):
 
 Now create a triangle plot (PDF):
 
-    ```./hi_plot.py examples/1_simulated_data/config.ini```
+```./hi_plot.py examples/1_simulated_data/config.ini```
 
 And generate a text file containing a MAP-centred reconstruction with
 error bars (see code for details):
 
-    ```./hi_recon.py examples/1_simulated_data/config.ini```
+```./hi_recon.py examples/1_simulated_data/config.ini```
 
 
