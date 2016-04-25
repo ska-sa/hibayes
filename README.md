@@ -111,6 +111,10 @@ Now create a triangle plot (PDF):
 
 ```./hi_plot.py examples/1_simulated_data/config.ini```
 
+Alternatively use e.g. [corner](https://github.com/dfm/corner.py):
+
+```pip install corner```
+
 And generate a text file containing a MAP-centred reconstruction with
 error bars (see code for details):
 
