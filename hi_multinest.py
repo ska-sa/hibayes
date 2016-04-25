@@ -3,10 +3,13 @@
 """
 # hi_multinest.py
 
-MCMC model fitting routine for global 21-cm cosmic dawn data.
+Bayesian Monte Carlo model fitting routine for global 21-cm cosmic
+dawn data.
 
 Jonathan Zwart
-September 2014
+Danny Price
+Gianni Bernardi
+April 2016
 
 Usage:
 
@@ -221,7 +224,7 @@ def main():
                     n_live_points=rp["n_live_points"],
                     evidence_tolerance=rp["evidence_tolerance"],
                     mode_tolerance=rp["mode_tolerance"], seed=rp["seed"], max_iter=rp["max_iter"],
-                    importance_nested_sampling=rp["do_INS"],
+                    importance_nested_sampling=rp["do_ins"],
                     outputfiles_basename=rp["outputfiles_basename"], init_MPI=False)
 
     #progress.stop()
