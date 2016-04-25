@@ -1,3 +1,3 @@
-- [Jonathan Zwart](jz@uwcastro.org)
-- [Danny Price](dan@thetelegraphic.com)
-- [Gianni Bernardi](gbernardi@ska.ac.za)
+- [Jonathan Zwart][jz@uwcastro.org]
+- [Danny Price][dan@thetelegraphic.com]
+- [Gianni Bernardi][gbernardi@ska.ac.za]
