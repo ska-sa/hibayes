@@ -42,8 +42,8 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print 'usage:'
         print
-        print 'with MPI [NB mpiEXEC on marchmain]:'
-        print '       mpiexec -n NPROC ./hi_multinest.py config_filename.ini'
+        print 'with MPI:'
+        print '       mpiexec -n NPROCS ./hi_multinest.py config_filename.ini'
         print
         sys.exit(0)
 
@@ -54,54 +54,11 @@ print "Runtime parameters"
 pprint.pprint(rp)
 time.sleep(2)
 
-
 #-------------------------------------------------------------------------------
 
 pri = Priors()
-
 @profile
-def myprior(cube, ndim, nparams):
-    """
-    """
-
-    cube[0] = pri.UniformPrior(cube[0], -600.0, 0.0)  # A/mK
-    cube[1] = pri.UniformPrior(cube[1], 40.0, 90.0)  # nu_HI/MHz
-    cube[2] = pri.UniformPrior(cube[2], 0.0, 10.0)  # sigma_HI/MHz
-
-    return
-
-#-------------------------------------------------------------------------------
-
-@profile
-def myloglike(cube, ndim, nparams):
-    """
-    Form of lhood assumes uncertainties are gaussian and uncorrelated
-    The latter can be extended later
-    """
-
-    A_HI     = cube[0]
-    nu_HI    = cube[1]
-    sigma_HI = cube[2]
-    #c=[cube[ic+3] for ic in range(ndim)]
-
-    loglike = 0.0
-    for idatum in range(len(freqs)):
-        #model = cube[0]*x[idatum]+cube[1]
-        Tsky = T_HI(A_HI, nu_HI, sigma_HI, freqs[idatum], norm=True) + T_fg(nu_1, c, nc, freqs[idatum])
-        sig = 1000 * sigma(Tsky, BW, tObs)
-        #print idatum,freqs[idatum],Tsky,sig
-        chisq = 0.5 * ((Tmeas[idatum] - Tsky) / sig) ** 2.0
-        prefactor = 0.5 * log(2.0 * pi * sig ** 2.0)
-        loglike -= prefactor + chisq
-    #sys.exit(0)
-    return loglike
-
-
-#-------------------------------------------------------------------------------
-
-#pri=Priors()
-@profile
-def mypriorj(cube, ndim, nparams, fg_only=False, bg_only=False, log_prior=False):
+def myprior(cube, ndim, nparams, fg_only=False, bg_only=False, log_prior=False):
     """
     Joint prior - HI and bandpass
     """
@@ -121,14 +78,6 @@ def mypriorj(cube, ndim, nparams, fg_only=False, bg_only=False, log_prior=False)
         cube[1]=pri.GeneralPrior(cube[1],'U', rp["FREQ_MIN"], rp["FREQ_MAX"])
 
     cube[2] = pri.GeneralPrior(cube[2], 'U', rp["SIGMA_HI_MIN"], rp["SIGMA_HI_MAX"])  # sigma_HI/MHz
-    #cube[2]=pri.UniformPrior(cube[2],0.01,0.01) # sigma_HI/MHz
-    #cube[2]=pri.UniformPrior(cube[2],SIGMA_HI_TRUE,SIGMA_HI_TRUE) # sigma_HI/MHz
-    #for i in range(ndim-3):
-    #    #cube[i+3]=pri.UniformPrior(cube[i+3],-BP_PRIOR_RANGE,+BP_PRIOR_RANGE)
-    #    cube[i+3]=pri.UniformPrior(cube[i+3],c[i],c[i])
-    #cube[3]=pri.UniformPrior(cube[3],-BP_PRIOR_RANGE,+BP_PRIOR_RANGE)
-    #cube[3]=pri.UniformPrior(cube[3],c[0],c[0])
-    #cube[3]=pri.UniformPrior(cube[3],-BP_PRIOR_RANGE,+BP_PRIOR_RANGE)
 
     for ic in range(ndim - 3):
         cube[ic + 3] = pri.GeneralPrior(cube[ic + 3], 'U', -rp["BP_PRIOR_RANGE"], +rp["BP_PRIOR_RANGE"])
@@ -140,7 +89,7 @@ def mypriorj(cube, ndim, nparams, fg_only=False, bg_only=False, log_prior=False)
 #-------------------------------------------------------------------------------
 
 @profile
-def myloglikej(cube, ndim, nparams):
+def myloglike(cube, ndim, nparams):
     """
     Form of lhood assumes uncertainties are gaussian and uncorrelated
     The latter can be extended later
@@ -179,21 +128,12 @@ def myloglikej(cube, ndim, nparams):
 
     return loglike
 
-
-#-------------------------------------------------------------------------------
-
-
 #-------------------------------------------------------------------------------
 
 @profile
 def main():
     """
     """
-
-    #try:
-    #    execfile(param_file)
-    #except IOError:
-    #    from settings import *
 
     global freqs, Tmeas, FREQ_MIN, FREQ_MAX, n_params
 
@@ -202,7 +142,6 @@ def main():
             os.mkdir(rp["outdir"])
         except:
             pass
-
 
     if rp["ledaSpec"] is None:
         Tmeas, freqs = generate_simulated_data(rp)
@@ -219,19 +158,17 @@ def main():
                                            outputfiles_basename=rp["outputfiles_basename"])
     #progress.start()
     
-    pymultinest.run(myloglikej, mypriorj, n_params, resume=False, verbose=True,
+    pymultinest.run(myloglike, myprior, n_params, resume=False, verbose=True,
                     multimodal=rp["multimodal"], max_modes=rp["max_modes"], write_output=True,
                     n_live_points=rp["n_live_points"],
                     evidence_tolerance=rp["evidence_tolerance"],
-                    mode_tolerance=rp["mode_tolerance"], seed=rp["seed"], max_iter=rp["max_iter"],
+                    mode_tolerance=rp["mode_tolerance"],
+                    seed=rp["seed"],
+                    max_iter=rp["max_iter"],
                     importance_nested_sampling=rp["do_ins"],
                     outputfiles_basename=rp["outputfiles_basename"], init_MPI=False)
 
     #progress.stop()
-
-    #contour_plot.contourTri(pylab.loadtxt('chains_test/1-post_equal_weights.dat'),
-    # line=True,outfile='chains_test/test.png',col=('red','blue'),labels=parameters,
-    # binsize=50,truth=plotTruth,ranges=plotRanges,autoscale=True)
 
     return 0
 
