@@ -91,17 +91,17 @@ error bars (see code for details):
 ```./hi_recon.py examples/1_simulated_data/config.ini```
 
 
-## Supplied examples
+## Supplied examples (see Bernardi et al. 2016
 
-1. Simulation (Bernardi et al. 2016)
+1. Simulation
 
-2. LEDA data (Bernardi et al. 2016)
+2. LEDA data
 
 ## Citation
 
 Use of this code should be cited as Zwart et al. 2016:
 
-@misc{ascl_hibayes,
+```@misc{ascl_hibayes,
 author = {{Zwart}, J.~T.~L. and others},
 title = "{HIBAYES: Global 21-cm Bayesian Monte-Carlo Model Fitting}",
 howpublished = {Astrophysics Source Code Library},
@@ -111,7 +111,7 @@ archivePrefix = "ascl",
 eprint = {xxxx.xxx},
 adsurl = {http://adsabs.harvard.edu/abs/xxxx.xxx},
 adsnote = {Provided by the SAO/NASA Astrophysics Data System}
-}
+}```
 
 The algorithm, applied to both simulated and LEDA data, is described
 in Bernardi et al. 2016:
