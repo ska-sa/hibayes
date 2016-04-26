@@ -68,6 +68,7 @@ speed-up (see below). Check the multinest examples run OK.
 2. Install mpi4py and pymultinest:
 
 ```pip install mpi4py```
+
 ```pip install pymultinest```
 
 Don't forget to set the ```(DY)LD_LIBRARY_PATH``` environment (see
