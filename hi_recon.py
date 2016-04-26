@@ -134,7 +134,6 @@ def main():
         except:
             ss = numpy.nan * numpy.ones(3)
         tt = peak_confidence(x, bins=10)
-        #print ss[0],tt
         #s[ibin,1]=ss[0]  # median
         #s[ibin,1]=tt     # peak
         s[ibin, 1] = ymap[ibin]  # MAP
