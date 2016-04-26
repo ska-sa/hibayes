@@ -65,8 +65,9 @@ feel free to plug in your own sampler, MCMC or otherwise.
 1. Fetch and install multinest, enabling MPI for an optional ~ ```NPROCS```
 speed-up (see below). Check the multinest examples run OK.
 
-2. Install pymultinest:
+2. Install mpi4py and pymultinest:
 
+```pip install mpi4py```
 ```pip install pymultinest```
 
 Don't forget to set the ```(DY)LD_LIBRARY_PATH``` environment (see
@@ -77,11 +78,7 @@ output from the following command indicates success:
 
 Then check the pymultinest examples run OK.
 
-3. Install mpi4py
-
-```pip install mpi4py```
-
-4. Don't forget to
+3. Don't forget to
 
 ```chmod +x *py```
 
