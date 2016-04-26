@@ -17,7 +17,7 @@ Usage:
 
 """
 
-
+from mpi4py import MPI
 import os
 import sys
 import time
@@ -71,10 +71,10 @@ def myprior(cube, ndim, nparams, fg_only=False, bg_only=False, log_prior=False):
     if not fg_only and not bg_only:
         cube[1] = pri.GeneralPrior(cube[1], 'U', rp["NU_MIN"], rp["NU_MAX"])
     elif not fg_only and bg_only:
-        # GB: comment this out if you're fitting for the HI too
+        # Comment this out if you're fitting for the HI too
         cube[1]=pri.UniformPrior(cube[1], rp["FREQ_MIN"],rp["FREQ_MAX"]) # nu_HI/MHz
     elif fg_only and not bg_only:
-        # GB: comment this out if you're fitting for the foregrounds only
+        # Comment this out if you're fitting for the foregrounds only
         cube[1]=pri.GeneralPrior(cube[1],'U', rp["FREQ_MIN"], rp["FREQ_MAX"])
 
     cube[2] = pri.GeneralPrior(cube[2], 'U', rp["SIGMA_HI_MIN"], rp["SIGMA_HI_MAX"])  # sigma_HI/MHz
@@ -95,36 +95,27 @@ def myloglike(cube, ndim, nparams):
     The latter can be extended later
     
     """
-    #numpy.savetxt('Tmeas.txt',Tmeas)	# GB: just a test to see that it reads the correct spectrum when run on real data
-    #numpy.savetxt('freqs.txt',freqs)	# GB: just a test to see that it reads the correct frequency when run on real data
+    #numpy.savetxt('Tmeas.txt',Tmeas)	# Test whether reads correct spectrum when run on data
+    #numpy.savetxt('freqs.txt',freqs)	# Test whether reads correct frequency when run on data
 
     A_HI = cube[0]
     nu_HI = cube[1]
     sigma_HI = cube[2]
     #c=[cube[ic+3] for ic in range(ndim)]
-    #print A_HI
 
     c_fit = [cube[i + 3] for i in range(ndim - 3)]
-    #print c
 
     loglike = 0.0
     for idatum in range(len(freqs)):
-        Tsky = 1.0e-3 * T_HI(A_HI, nu_HI, sigma_HI, freqs[idatum]) + T_fg(nu_1, c_fit, rp["nc_fit"], freqs[idatum])
-        #print idatum,freqs[idatum],Tsky,Tp
-        #print idatum,Tmeas[idatum],Tf(nu_1,c,nc,freqs[idatum]),1.0e-3*T_HI(A_HI,nu_HI,sigma_HI,freqs[idatum]),Tsky,sig,c
-        #sig=sigma(Tf(nu_1,c,nc,freqs[idatum]),BW,tObs)
+        Tsky = 1.0e-3 * T_HI(A_HI, nu_HI, sigma_HI, freqs[idatum]) + \
+          T_fg(nu_1, c_fit, rp["nc_fit"], freqs[idatum])
         if rp["spectrum_errors"] is not None:
             sig = errors[idatum]
         else:
             sig = sigma(Tsky, rp["BW"], rp["tObs"])
-            #print idatum,Tpure[idatum],Tsky
-            #print freqs[idatum],Tpure[idatum],Tmeas[idatum],Tsky,Tpure[idatum+1]-Tsky,sig,Thi[idatum]#,c
-        #        print Thi[idatum],1.0e-3*T_HI(A_HI,nu_HI,sigma_HI,freqs[idatum])
         chisq = 0.5 * ((Tmeas[idatum] - Tsky) / sig) ** 2.0
         prefactor = 0.5 * log(2.0 * pi * sig ** 2.0)
         loglike -= prefactor + chisq
-
-    #sys.exit(0)
 
     return loglike
 
@@ -153,9 +144,8 @@ def main():
 
     n_params = rp["nc_fit"] + 3
 
-
-    progress = pymultinest.ProgressPlotter(n_params=n_params,  interval_ms=10000,
-                                           outputfiles_basename=rp["outputfiles_basename"])
+    #progress = pymultinest.ProgressPlotter(n_params=n_params,  interval_ms=10000,
+    #                                       outputfiles_basename=rp["outputfiles_basename"])
     #progress.start()
     
     pymultinest.run(myloglike, myprior, n_params, resume=False, verbose=True,
@@ -166,7 +156,8 @@ def main():
                     seed=rp["seed"],
                     max_iter=rp["max_iter"],
                     importance_nested_sampling=rp["do_ins"],
-                    outputfiles_basename=rp["outputfiles_basename"], init_MPI=False)
+                    outputfiles_basename=rp["outputfiles_basename"],\
+                    init_MPI=False)
 
     #progress.stop()
 
