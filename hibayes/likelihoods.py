@@ -11,7 +11,7 @@ from hibayes.profile_support import profile
 from hibayes.parse_config import parse_config
 from hibayes.sky_model import generate_simulated_data
 from hibayes.spectral_models import T_HI,T_fg,sigma
-from hibayes.sky_model import nu_1
+#from hibayes.sky_model import nu_1
 param_file = sys.argv[-1]
 
 rp = parse_config(param_file)
@@ -81,7 +81,7 @@ def loglike(cube, ndim, nparams):
     loglike = 0.0
     for idatum in range(len(freqs)):
         Tsky = 1.0e-3 * T_HI(A_HI, nu_HI, sigma_HI, freqs[idatum]) + \
-          T_fg(nu_1, c_fit, rp["nc_fit"], freqs[idatum])
+          T_fg(rp["nu_1"], c_fit, rp["nc_fit"], freqs[idatum])
         if rp["spectrum_errors"] is not None:
             sig = errors[idatum]
         else:

@@ -10,14 +10,7 @@ import pylab as plt
 from .profile_support import profile
 from .spectral_models import T_HI, T_fg, sigma
 
-# Model coefficients
-c = numpy.array([3.5838589, -2.6037328, 0.011413659, 0.063431635, 0.24762264, 0.72968515, -1.7143701, -9.1163046])
-c = numpy.array([3.5838589, -2.6037328, 0.011413659, 0.063431635, 0.24762264, 0.72968515, -1.7143701])
-nc = len(c)
-#c=numpy.zeros(nc)
-
-nu_1 = 60.0  # Ref. freq. in MHz
-
+#-------------------------------------------------------------------------------
 
 @profile
 def generate_simulated_data(rp, plot_data=False):
@@ -30,15 +23,20 @@ def generate_simulated_data(rp, plot_data=False):
     Returns:
         (Tmeas, freqs): tuple of simulated temperature-frequency pairs
     """
-
     # Set up the simulated data
-    freqs = numpy.arange(rp["FREQ_MIN"], rp["FREQ_MAX"], rp["BW"] / 1.0e6)
+    freqs = numpy.arange(rp["FREQ_MIN"], rp["FREQ_MAX"], rp["BW"]/1.0e6)
     Tmeas = numpy.zeros(len(freqs))
     Tpure = numpy.zeros(len(freqs))
     draw = numpy.zeros(len(freqs))
     Thi = numpy.zeros(len(freqs))
     numpy.random.seed(seed=rp["seed_SIM"])
     Tall = numpy.zeros((len(freqs), 6))
+
+    if True:
+        global c,nc,nu_1
+        c=rp["coeffs"]
+        nc=rp["ncoeffs"]
+        nu_1=rp["nu_1"]
 
     for idatum in range(len(freqs)):
         Thi[idatum] = 1.0e-3 * T_HI(rp["A_HI_TRUE"], rp["NU_HI_TRUE"], rp["SIGMA_HI_TRUE"], freqs[idatum])
@@ -73,3 +71,5 @@ def generate_simulated_data(rp, plot_data=False):
         plt.show()
 
     return Tmeas, freqs
+
+#-------------------------------------------------------------------------------
