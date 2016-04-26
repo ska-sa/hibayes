@@ -12,25 +12,11 @@ Usage e.g.:
 """
 
 import numpy as np
-from numpy import log
 import sys
 
 # -------------------------------------------------------------------------------
 
 class Priors(object):
-    """
-    Jonathan Zwart
-    6 July 2013
-    5 March 2014 - added general prior function
-
-    Taken from MultiNEST priors.f90
-    Usage e.g.:
-        from priors import Priors
-        pri=Priors()
-        cube[0]=pri.UniformPrior(cube[0],1.0,199.0)
-        cube[0]=pri.GeneralPrior(cube[0],'LOG',1.0,100.0)
-        etc.
-    """
 
     def __init__(self):
         pass
@@ -88,7 +74,7 @@ class Priors(object):
             if (x1 == 0):
                 lx1 = sys.float_info.min
             else:
-                lx1 = log(x1)
+                lx1 = np.log(x1)
             if (x2 == 0):
                 lx2 = sys.float_info.min
             else:
