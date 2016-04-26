@@ -53,7 +53,7 @@ def main():
     """
     """
 
-    # Set up MPI                                   
+    # Set up MPI variables
     world=MPI.COMM_WORLD
     rank=world.rank
     size=world.size
