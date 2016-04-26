@@ -56,6 +56,7 @@ feel free to plug in your own sampler, MCMC or otherwise.
 
 - python 2.7.x
 - MPI (optional)
+- mpi4py
 - [multinest](http://ccpforge.cse.rl.ac.uk/gf/project/multinest)
 - [pymultinest](http://johannesbuchner.github.io/PyMultiNest)
 
@@ -76,7 +77,11 @@ output from the following command indicates success:
 
 Then check the pymultinest examples run OK.
 
-3. Don't forget to
+3. Install mpi4py
+
+```pip install mpi4py```
+
+4. Don't forget to
 
 ```chmod +x *py```
 
