@@ -63,7 +63,7 @@ def main():
     line = False
     autoscale = True
     title = ''
-    truth = None
+    truth = rp["plotTruth"]
     extn = 'pdf'
     binsize = 25
     bundle = contour_plot.contourTri(chain,

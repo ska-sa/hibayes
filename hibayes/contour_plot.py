@@ -275,7 +275,7 @@ def contourTri(chain, **kwargs):
 
         if 'truth' in kwargs and kwargs['truth'] is not None:
             truth = kwargs['truth']
-            pylab.plot(truth[labels[panel[0]]], truth[labels[panel[1]]], 'g+', \
+            pylab.plot(truth[labels[panel[0]]], truth[labels[panel[1]]], 'r+', \
                        markersize=20)
 
         if 'labelDict' in kwargs and kwargs['labelDict'] is not None:
@@ -335,7 +335,7 @@ def contourTri(chain, **kwargs):
 
         if 'truth' in kwargs and kwargs['truth'] is not None:
             truth = kwargs['truth']
-            pylab.axvline(truth[parameters[iparam]], color='g')
+            pylab.axvline(truth[parameters[iparam]], color='r')
 
         if iparam == 0:
             ax1d.set_ylabel(labelDict[labels[iparam]], fontsize=8)

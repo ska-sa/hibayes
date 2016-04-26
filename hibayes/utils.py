@@ -159,7 +159,11 @@ def fetchStats(outdir, parameters, truth):
     # ugliest syntax ever!
     print '\n# truth param bestfit median lower upper'
     for param in parameters:
-        print '%7s' % param, '%.2f' % truth[param], ' '.join(['%.2f' % s for s in summary[param]])
+        if truth is None:
+            t=-99.0
+        else:
+            t=truth[param]
+        print '%7s' % param, '%.2f' % t, ' '.join(['%.2f' % s for s in summary[param]])
 
     print '****Global log-evidence is %f' % Zg
 

@@ -53,6 +53,7 @@ def parse_config(filename):
     confdict["A_HI_TRUE"]     = config.getfloat("simulation", "A_HI_TRUE")
     confdict["NU_HI_TRUE"]    = config.getfloat("simulation", "NU_HI_TRUE")
     confdict["SIGMA_HI_TRUE"] = config.getfloat("simulation", "SIGMA_HI_TRUE")
+    confdict["plot_truth"]      = config.getboolean("simulation", "plot_truth")
 
     # Observing parameters
 
@@ -87,15 +88,18 @@ def parse_config(filename):
     for ic in range(nc_fit):
         confdict["plotRanges"]['p%i' % ic] = [-confdict["BP_PRIOR_RANGE"], confdict["BP_PRIOR_RANGE"]]
 
-    confdict["plotTruth"] = {'A_HI': confdict["A_HI_TRUE"],
+    if confdict["plot_truth"]:
+        confdict["plotTruth"] = {'A_HI': confdict["A_HI_TRUE"],
                              'NU_HI': confdict["NU_HI_TRUE"],
                              'SIGMA_HI': confdict["SIGMA_HI_TRUE"]}
 
-    for ic in range(ncoeffs):
-        confdict["plotTruth"]['p%i' % ic] = c[ic]
-    if nc_fit > ncoeffs:
-        for ic in range(ncoeffs, nc_fit):
-            confdict["plotTruth"]['p%i' % ic] = -1000.0
+        for ic in range(ncoeffs):
+            confdict["plotTruth"]['p%i' % ic] = c[ic]
+        if nc_fit > ncoeffs:
+            for ic in range(ncoeffs, nc_fit):
+                confdict["plotTruth"]['p%i' % ic] = -1000.0
+    else:
+        confdict["plotTruth"]=None
 
     # Plotting
     confdict["labelDict"] = {'A_HI': r'$A_{HI}/\mathrm{mK}$',
