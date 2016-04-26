@@ -104,7 +104,7 @@ def main():
     for isamp in xrange(nsamp):
         #z[isamp,ncols-1:]=ff(freqs,drawmap=z[isamp,:],fr_1=nu_1)
         for ifreq, freq in enumerate(freqs):
-            z[isamp, ncols - 1 + ifreq] = recon_func(freq, drawmap=z[isamp, :],\fr_1=nu_1, subtractValue=data[ifreq])
+            z[isamp, ncols - 1 + ifreq] = recon_func(freq, drawmap=z[isamp, :],fr_1=nu_1, subtractValue=data[ifreq])
 
     # Blanking, 0.0 -> NaN
     z[numpy.where(z == 0.0)] = 'NaN'
@@ -148,12 +148,8 @@ def main():
     rstatsf = 'recon_stats.txt'
     rstatsf = os.path.join(rp["outdir"], rstatsf)
     hdr = 'freq_MHz T_K T_K_lower T_K_upper skewness kurtosis'
-    fid = open(rstatsf, 'w')
-    #print s
-
+    numpy.savetxt(rstatsf, s, header=hdr)
     print '-> Writing reconstructed spectrum to %s' % rstatsf
-    numpy.savetxt(fid, s, header=hdr)
-    fid.close()
     print 'Finished.'
 
     return 0
