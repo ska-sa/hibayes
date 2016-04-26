@@ -83,7 +83,7 @@ def main():
 
     # Fetch 'best-fit' parameters and calculate 'best-fit' line
     ana = pymultinest.analyse.Analyzer(ncols - 1, \
-                                       outputfiles_basename=os.path.join(rp["outdir"],rp["outstem"]))
+                outputfiles_basename=os.path.join(rp["outdir"],rp["outstem"]))
     drawml = ana.get_best_fit()['parameters']
 
     summf = os.path.join(rp["outdir"], '%ssummary.txt'%rp["outstem"])
@@ -104,7 +104,7 @@ def main():
     for isamp in xrange(nsamp):
         #z[isamp,ncols-1:]=ff(freqs,drawmap=z[isamp,:],fr_1=nu_1)
         for ifreq, freq in enumerate(freqs):
-            z[isamp, ncols - 1 + ifreq] = recon_func(freq, drawmap=z[isamp, :],fr_1=nu_1, subtractValue=data[ifreq])
+            z[isamp, ncols - 1 + ifreq] = recon_func(freq, drawmap=z[isamp, :],\fr_1=nu_1, subtractValue=data[ifreq])
 
     # Blanking, 0.0 -> NaN
     z[numpy.where(z == 0.0)] = 'NaN'
@@ -147,7 +147,7 @@ def main():
     # ...and output to file
     rstatsf = 'recon_stats.txt'
     rstatsf = os.path.join(rp["outdir"], rstatsf)
-    hdr = 'freq_MHz T T_lower T_upper skewness kurtosis'
+    hdr = 'freq_MHz T_K T_K_lower T_K_upper skewness kurtosis'
     fid = open(rstatsf, 'w')
     #print s
 
