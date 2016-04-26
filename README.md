@@ -86,7 +86,7 @@ Then check the pymultinest examples run OK.
 
 ## Usage
 
-From the project root directory,
+**From the project root directory,**
 
 ```mpiexec -n NPROCS ./hi_multinest.py examples/1_simulated_data/config.ini```
 
@@ -116,7 +116,7 @@ outstem ```1-``` can be set in ```config.ini```):
 - ```1-resume.txt``` for checkpointing.
 - ```1-.txt``` for analysis in [cosmomc](http://cosmologist.info/cosmomc).
 
-Now create a triangle plot (PDF):
+**Now create a triangle plot (PDF):**
 
 ```./hi_plot.py examples/1_simulated_data/config.ini```
 
@@ -124,8 +124,8 @@ Alternatively use e.g. [corner](https://github.com/dfm/corner.py):
 
 ```pip install corner```
 
-And generate a text file ```recon_stats.txt``` containing a
-MAP-centred reconstruction with error bars (see code for details):
+**And generate a text file ```recon_stats.txt``` containing a
+MAP-centred reconstruction with error bars (see code for details):**
 
 ```./hi_recon.py examples/1_simulated_data/config.ini```
 
