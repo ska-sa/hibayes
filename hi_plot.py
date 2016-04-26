@@ -46,25 +46,19 @@ def main():
 
     print 'Settings file is %s' % param_file
 
-    # Insert custom settings here
-    #plotRanges['C']=[0,200]
-    # triangle='triangle_%s.png' %outdir
+    # Insert custom tweaks here e.g.
+    #rp["plotRanges"]['C']=[0,200]
+
     triangle = 'triangle.pdf'
-    #triangle = 'triangle_%s.pdf' % rp["outdir"]
     autoscale = False
 
     chain = pylab.loadtxt('%s/1-post_equal_weights.dat' % rp["outdir"])
+
+    # Make a budget plot
     bundle = contour_plot.contourTri(chain,
                                      line=True, outfile='%s/%s' % (rp["outdir"], triangle),
                                      col=('red', 'blue'), labels=rp["parameters"],
-                                     ranges=rp["plotRanges"], autoscale=autoscale)
-    #bundle=contour_plot.contourTri(chain,\
-    #                        line=True,outfile='%s/%s'%(outdir,triangle),\
-    #                        col=('red','blue'),labels=parameters,\
-    #                        ranges=plotRanges,truth=plotTruth,autoscale=True,\
-    #                        title='%s - %s'%(outdir,dataset))
-
-    print '-> Now open %s/%s' % (rp["outdir"], triangle)
+                                     ranges=rp["plotRanges"],autoscale=autoscale)
 
     # Plot for publication
     line = False

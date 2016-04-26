@@ -9,14 +9,9 @@ Modified: Jonathan Zwart (12 August 2013)
 """
 
 import sys
-
 import pylab
 from scipy import interpolate
-
-# from lumfunc import *
 from hibayes.utils import *
-#from settings import *
-
 import matplotlib
 
 #-------------------------------------------------------------------------------

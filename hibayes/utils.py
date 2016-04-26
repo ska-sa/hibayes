@@ -153,7 +153,7 @@ def fetchStats(outdir, parameters, truth):
     for ip, param in enumerate(parameters):
         s = stats[ip]
         b = bf['parameters'][ip]
-        print s['1sigma']
+        #print s['1sigma']
         summary[param] = (b, s['median'], s['1sigma'][0], s['1sigma'][-1])
 
     # ugliest syntax ever!
