@@ -42,12 +42,12 @@ param_file = sys.argv[-1]
 rp = parse_config(param_file)
 
 
-def func(fr, drawmap=None, fr_1=None, subtractValue=None):
+def recon_func(fr, drawmap=None, fr_1=None, subtractValue=None):
     recon = 1.0e-3 * T_HI(drawmap[0], drawmap[1], drawmap[2], fr) + T_fg(fr_1, drawmap[3:], len(drawmap[3:]), fr)
     if subtractValue is not None:
         recon -= subtractValue
     return recon
-    # ff=numpy.vectorize(func,excluded=('drawmap','fr_1'))
+    # ff=numpy.vectorize(recon_func,excluded=('drawmap','fr_1'))
 
 
 # -------------------------------------------------------------------------------
@@ -98,13 +98,13 @@ def main():
     # Convert drawmap into correct units etc.
     ymap = numpy.zeros(len(freqs))
     for ifreq, freq in enumerate(freqs):
-        ymap[ifreq] = func(freq, drawmap=drawmap,fr_1=nu_1, subtractValue=data[ifreq])
+        ymap[ifreq] = recon_func(freq, drawmap=drawmap,fr_1=nu_1, subtractValue=data[ifreq])
     #ymap=ff(freqs,drawmap=drawmap,fr_1=nu_1)
 
     for isamp in xrange(nsamp):
         #z[isamp,ncols-1:]=ff(freqs,drawmap=z[isamp,:],fr_1=nu_1)
         for ifreq, freq in enumerate(freqs):
-            z[isamp, ncols - 1 + ifreq] = func(freq, drawmap=z[isamp, :],fr_1=nu_1, subtractValue=data[ifreq])
+            z[isamp, ncols - 1 + ifreq] = recon_func(freq, drawmap=z[isamp, :],fr_1=nu_1, subtractValue=data[ifreq])
 
     # Blanking, 0.0 -> NaN
     z[numpy.where(z == 0.0)] = 'NaN'
@@ -138,7 +138,6 @@ def main():
         #s[ibin,1]=ss[0]  # median
         #s[ibin,1]=tt     # peak
         s[ibin, 1] = ymap[ibin]  # MAP
-        #print ymap
         s[ibin, 2] = ss[0] - ss[1]  # lower
         s[ibin, 3] = ss[2] - ss[0]  # upper
         s[ibin, 4] = stats.skew(x)  # skewness
