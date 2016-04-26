@@ -21,11 +21,7 @@ import pprint
 from hibayes.parse_config import parse_config
 import pylab
 
-# if os.getenv('PBS_O_HOST') is not None and 'baltasar' not in os.getenv('PBS_O_HOST'):
 from hibayes import contour_plot
-
-if os.getenv('PBS_O_HOST') not in [None, 'baltasar']:
-    import pylab
 from hibayes.utils import *
 
 if __name__ == "__main__":
@@ -50,16 +46,11 @@ def main():
 
     print 'Settings file is %s' % param_file
 
-    # Import the settings variables
-    #set_module = importlib.import_module(setf)
-    #globals().update(set_module.__dict__)
-
-    # Insert hacks here
+    # Insert custom settings here
     #plotRanges['C']=[0,200]
-    #    triangle='triangle_%s.png' %outdir		# original
+    # triangle='triangle_%s.png' %outdir
     triangle = 'triangle.pdf'
     #triangle = 'triangle_%s.pdf' % rp["outdir"]
-    #    autoscale=True	# comment back for original
     autoscale = False
 
     chain = pylab.loadtxt('%s/1-post_equal_weights.dat' % rp["outdir"])
