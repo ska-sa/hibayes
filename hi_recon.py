@@ -27,7 +27,7 @@ import pymultinest
 
 from hibayes.utils import calculate_confidence, peak_confidence
 from hibayes.spectral_models import T_fg, T_HI
-from hibayes.sky_model import nu_1, generate_simulated_data
+from hibayes.sky_model import generate_simulated_data
 from hibayes.parse_config import parse_config
 
 if __name__ == "__main__":
@@ -98,13 +98,13 @@ def main():
     # Convert drawmap into correct units etc.
     ymap = numpy.zeros(len(freqs))
     for ifreq, freq in enumerate(freqs):
-        ymap[ifreq] = recon_func(freq, drawmap=drawmap,fr_1=nu_1, subtractValue=data[ifreq])
+        ymap[ifreq] = recon_func(freq, drawmap=drawmap,fr_1=rp["nu_1"], subtractValue=data[ifreq])
     #ymap=ff(freqs,drawmap=drawmap,fr_1=nu_1)
 
     for isamp in xrange(nsamp):
         #z[isamp,ncols-1:]=ff(freqs,drawmap=z[isamp,:],fr_1=nu_1)
         for ifreq, freq in enumerate(freqs):
-            z[isamp, ncols - 1 + ifreq] = recon_func(freq, drawmap=z[isamp, :],fr_1=nu_1, subtractValue=data[ifreq])
+            z[isamp, ncols - 1 + ifreq] = recon_func(freq, drawmap=z[isamp, :],fr_1=rp["nu_1"], subtractValue=data[ifreq])
 
     # Blanking, 0.0 -> NaN
     z[numpy.where(z == 0.0)] = 'NaN'
