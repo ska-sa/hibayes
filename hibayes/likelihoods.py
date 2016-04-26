@@ -11,7 +11,6 @@ from hibayes.profile_support import profile
 from hibayes.parse_config import parse_config
 from hibayes.sky_model import generate_simulated_data
 from hibayes.spectral_models import T_HI,T_fg,sigma
-#from hibayes.sky_model import nu_1
 param_file = sys.argv[-1]
 
 rp = parse_config(param_file)
@@ -33,7 +32,7 @@ pri = Priors()
 @profile
 def logprior(cube, ndim, nparams, fg_only=False, bg_only=False, log_prior=False):
     """
-    Joint prior - HI and bandpass
+    Joint prior - HI and foregrounds
     """
 
     if log_prior:

@@ -17,10 +17,9 @@ Usage:
 import sys
 import time
 import os
+import pylab
 import pprint
 from hibayes.parse_config import parse_config
-import pylab
-
 from hibayes import contour_plot
 from hibayes.utils import *
 

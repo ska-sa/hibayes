@@ -8,7 +8,7 @@ Functions for parsing a .ini formatted configuration file
 from ConfigParser import SafeConfigParser
 import os
 
-#from hibayes.sky_model import c, nc
+#-------------------------------------------------------------------------------
 
 def parse_config(filename):
     """ Open a config.ini file and parse it into a dictionary of config values
