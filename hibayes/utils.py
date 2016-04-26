@@ -1,11 +1,10 @@
 """
 # utils.py
 
-Useful functions
+Useful support functions
 """
 
 import os
-
 import numpy
 import scipy
 from scipy import stats
