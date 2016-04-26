@@ -45,9 +45,6 @@ if __name__ == "__main__":
 param_file = sys.argv[-1]
 # load runtime parameters
 rp = parse_config(param_file)
-print "Runtime parameters"
-pprint.pprint(rp)
-time.sleep(2)
 
 #-------------------------------------------------------------------------------
 
@@ -56,11 +53,22 @@ def main():
     """
     """
 
-    if not os.path.exists(rp["outdir"]):
-        try:
-            os.mkdir(rp["outdir"])
-        except:
-            pass
+    # Set up MPI                                   
+    world=MPI.COMM_WORLD
+    rank=world.rank
+    size=world.size
+    master = rank==0
+
+    if master:
+        print "Runtime parameters"
+        pprint.pprint(rp)
+        time.sleep(2)
+
+        if not os.path.exists(rp["outdir"]):
+            try:
+                os.mkdir(rp["outdir"])
+            except:
+                pass
 
     n_params = rp["nc_fit"] + 3
 
