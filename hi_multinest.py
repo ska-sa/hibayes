@@ -87,6 +87,10 @@ def main():
                     outputfiles_basename=rp["outputfiles_basename"],\
                     init_MPI=False)
 
+    if master:
+        # Copy the config.ini file to the output dir
+        shutil.copy(param_file,rp["outdir"])
+
     #progress.stop()
 
     return 0
