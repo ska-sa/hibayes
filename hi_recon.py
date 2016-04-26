@@ -4,6 +4,7 @@
 # hi_recon.py
 
 Reconstruct the (measured) spectrum from Multinest output
+Generates an ascii file recon_stats.txt that you can use for plotting
 
 Jonathan Zwart
 Danny Price
@@ -32,7 +33,7 @@ from hibayes.parse_config import parse_config
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print 'usage:'
-        print './hi_plot.py config_filename.ini'
+        print './hi_recon.py config_filename.ini'
         print
         sys.exit(0)
 

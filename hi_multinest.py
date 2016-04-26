@@ -13,7 +13,7 @@ April 2016
 
 Usage:
 
-./hi_plot.py config_file.ini
+./hi_multinest.py config_file.ini
 
 """
 
@@ -25,11 +25,7 @@ import pymultinest
 from mpi4py import MPI
 
 from hibayes.profile_support import profile
-from hibayes.constants import *
 from hibayes.parse_config import parse_config
-from hibayes.utils import *
-from hibayes.spectral_models import T_fg, T_HI, sigma
-from hibayes.sky_model import generate_simulated_data, nu_1
 from hibayes.likelihoods import logprior,loglike
 
 import pprint
