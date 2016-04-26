@@ -58,13 +58,6 @@ def main():
     # Import the settings variables
     print 'Settings file is %s' % param_file
 
-    # Import the settings variables
-    #set_module = importlib.import_module(settingsf)
-    #globals().update(set_module.__dict__)
-
-    # Set up the experiment
-    #expt=countModel(modelFamily,nlaws,settingsf,dataset,floatNoise)
-
     if rp["ledaSpec"] is None:
         data, freqs = generate_simulated_data(rp)
     else:
@@ -132,7 +125,6 @@ def main():
         # http://stackoverflow.com/questions/11620914/removing-nan-values-from-an-array
         x = x[~numpy.isnan(x)]
         #ss=stats.bayes_mvs(x,alpha=0.68)[0]
-        #x*=numpy.power(s[ibin,0]/1.0e6,2.5)
 
         try:
             ss = numpy.zeros(3)
@@ -140,9 +132,8 @@ def main():
         except:
             ss = numpy.nan * numpy.ones(3)
         tt = peak_confidence(x, bins=10)
-        #ss*=numpy.power(s[ibin,0]/1.0e6,2.5)
         #print ss[0],tt
-        #        s[ibin,1]=ss[0]  # median
+        #s[ibin,1]=ss[0]  # median
         #s[ibin,1]=tt     # peak
         s[ibin, 1] = ymap[ibin]  # MAP
         #print ymap
@@ -150,15 +141,15 @@ def main():
         s[ibin, 3] = ss[2] - ss[0]  # upper
         s[ibin, 4] = stats.skew(x)  # skewness
         s[ibin, 5] = stats.kurtosis(x)  # kurtosis
-        print ibin, s[ibin, 0], s[ibin, 1], dlow, dhigh, ss[1], ss[2], s[ibin, 4], s[ibin, 5]  #,stats.skewtest(x)
+        #print ibin, s[ibin, 0], s[ibin, 1], dlow, dhigh, ss[1], ss[2], s[ibin, 4], s[ibin, 5]
 
     # ...and output to file
     rstatsf = 'recon_stats.txt'
     rstatsf = os.path.join(rp["outdir"], rstatsf)
     hdr = '# freq_MHz T T_lower T_upper skewness kurtosis'
     fid = open(rstatsf, 'w')
-    print hdr
-    print s
+    #print hdr
+    #print s
 
     print '-> Writing reconstructed spectrum to %s' % rstatsf
     fid.write('%s\n' % hdr)
