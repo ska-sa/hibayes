@@ -114,12 +114,13 @@ def main():
     reconf = os.path.join(rp["outdir"], reconf)
     recons = z[:, ncols - 1:]
     numpy.savetxt(reconf, recons)
+    print '-> Writing raw reconstructions to %s'%reconf
 
     # Generate stats here...
     s = numpy.zeros((nfreqs, 6))
     s[:, 0] = freqs
 
-    print '# ibin flux fit low high dlower dupper skew kurtosis'
+    #print '# ibin flux fit low high dlower dupper skew kurtosis'
     for ibin in xrange(nfreqs):
         x = recons[:, ibin]
         # Remove NaNs from stats vectors
