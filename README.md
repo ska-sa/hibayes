@@ -136,7 +136,7 @@ reconstructed spectra and has dimensions ```nsamp x nfreqs```.
 
 1. Simulation
 
-2. LEDA data
+2. LEDA data (not yet available)
 
 3...
 
