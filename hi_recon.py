@@ -113,7 +113,8 @@ def main():
     reconf = 'recon_raw.txt'
     reconf = os.path.join(rp["outdir"], reconf)
     recons = z[:, ncols - 1:]
-    numpy.savetxt(reconf, recons)
+    hdr=' '.join(map(str,freqs))
+    numpy.savetxt(reconf, recons, header=hdr)
     print '-> Writing raw reconstructions to %s'%reconf
 
     # Generate stats here...
@@ -147,14 +148,12 @@ def main():
     # ...and output to file
     rstatsf = 'recon_stats.txt'
     rstatsf = os.path.join(rp["outdir"], rstatsf)
-    hdr = '# freq_MHz T T_lower T_upper skewness kurtosis'
+    hdr = 'freq_MHz T T_lower T_upper skewness kurtosis'
     fid = open(rstatsf, 'w')
-    #print hdr
     #print s
 
     print '-> Writing reconstructed spectrum to %s' % rstatsf
-    fid.write('%s\n' % hdr)
-    numpy.savetxt(fid, s)
+    numpy.savetxt(fid, s, header=hdr)
     fid.close()
     print 'Finished.'
 
