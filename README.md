@@ -157,10 +157,20 @@ adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 ```
 
 The algorithm, applied to both simulated and LEDA data, is described
-in Bernardi et al. 2016:
+in Bernardi et al. 2016 (MNRAS accepted):
 
-(bibtex here)
-
-
-
-
+```@ARTICLE{2016arXiv160606006B,
+   author = {{Bernardi}, G. and {Zwart}, J.~T.~L. and {Price}, D. and {Greenhill}, L.~J. and 
+   {Mesinger}, A. and {Dowell}, J. and {Eftekhari}, T. and {Ellingson}, S.~W. and 
+   {Kocz}, J. and {Schinzel}, F.},
+    title = "{Bayesian constraints on the global 21-cm signal from the Cosmic Dawn}",
+  journal = {ArXiv e-prints},
+archivePrefix = "arXiv",
+   eprint = {1606.06006},
+ keywords = {Astrophysics - Cosmology and Nongalactic Astrophysics},
+     year = 2016,
+    month = jun,
+   adsurl = {http://adsabs.harvard.edu/abs/2016arXiv160606006B},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+```
