@@ -141,16 +141,16 @@ reconstructed spectra and has dimensions ```nsamp x nfreqs```.
 
 ## Citations
 
-Use of this code should be cited as Zwart et al. 2016:
+Use of this code should be cited as Zwart et al. 2016 (ASCL submitted):
 
 ```@misc{ascl_hibayes,
-author = {{Zwart}, J.~T.~L. and others},
+author = {{Zwart}, J.~T.~L. and {Price}, D. and {Bernardi}, G.},
 title = "{HIBAYES: Global 21-cm Bayesian Monte-Carlo Model Fitting}",
 howpublished = {Astrophysics Source Code Library},
 year = 2016,
-month = mar,
+month = jun,
 archivePrefix = "ascl",
-eprint = {xxxx.xxx},
+eprint = {1606.xxx},
 adsurl = {http://adsabs.harvard.edu/abs/xxxx.xxx},
 adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
