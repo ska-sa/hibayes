@@ -50,6 +50,7 @@ def generate_simulated_data(rp, plot_data=False):
         Tall[idatum, :] = [freqs[idatum], Tpure[idatum], draw[idatum], Tmeas[idatum], T_fg(nu_1, c, nc, freqs[idatum]),
                            Thi[idatum]]
 
+    if not os.path.exists(rp["outdir"]): os.mkdir(rp["outdir"])
     #    numpy.savetxt('tall.txt',Tall,header='freq Tpure noise Tmeas Tf T_HI')
     numpy.savetxt(os.path.join(rp["outdir"], 'tpure.txt'), Tpure)
     numpy.savetxt(os.path.join(rp["outdir"], 'tmeas.txt'), Tmeas)
