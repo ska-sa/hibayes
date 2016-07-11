@@ -161,7 +161,8 @@ archivePrefix = "ascl",
 The algorithm, applied to both simulated and LEDA data, is described
 in Bernardi et al. 2016 (MNRAS accepted):
 
-```@ARTICLE{2016arXiv160606006B,
+```
+@ARTICLE{2016arXiv160606006B,
    author = {{Bernardi}, G. and {Zwart}, J.~T.~L. and {Price}, D. and {Greenhill}, L.~J. and 
    {Mesinger}, A. and {Dowell}, J. and {Eftekhari}, T. and {Ellingson}, S.~W. and 
    {Kocz}, J. and {Schinzel}, F.},
