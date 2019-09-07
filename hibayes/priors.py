@@ -33,7 +33,7 @@ class Priors(object):
         elif PriorType == 'JEFF':
             return self.JeffreysPrior(r, x1, x2)
         else:
-            print 'Unrecognised prior'
+            print('Unrecognised prior')
             return 1
 
     def DeltaFunctionPrior(self, r, x1, x2):

@@ -36,11 +36,11 @@ numpy.seterr(divide='ignore', invalid='ignore')
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print 'usage:'
-        print
-        print 'with MPI:'
-        print '       mpiexec -n NPROCS ./hi_multinest.py config_filename.ini'
-        print
+        print(""" usage:
+        
+        with MPI:
+               mpiexec -n NPROCS ./hi_multinest.py config_filename.ini""")
+        
         sys.exit(0)
 
 param_file = sys.argv[-1]
@@ -61,7 +61,7 @@ def main():
     master = rank==0
 
     if master:
-        print "Runtime parameters"
+        print("Runtime parameters")
         pprint.pprint(rp)
         time.sleep(2)
 

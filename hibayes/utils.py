@@ -43,7 +43,7 @@ def dump_variable_values(module, moduleFile, verbose=False):
 
     for i in range(len(dir(module))):
         line = ['%s %s' % (x, getattr(module, x)) for x in dir(module)][i]
-        if verbose: print line
+        if verbose: print(line)
         f.write('%s\n' % line)
 
     f.close()
@@ -135,7 +135,7 @@ def fetchStats(outdir, parameters, truth):
     """
     """
 
-    print '-> analysing summary stats:'
+    print('-> analysing summary stats:')
 
     n_params = len(parameters)
     statsf = '%s/1-' % outdir
@@ -157,15 +157,15 @@ def fetchStats(outdir, parameters, truth):
         summary[param] = (b, s['median'], s['1sigma'][0], s['1sigma'][-1])
 
     # ugliest syntax ever!
-    print '\n# truth param bestfit median lower upper'
+    print('\n# truth param bestfit median lower upper')
     for param in parameters:
         if truth is None:
             t=-99.0
         else:
             t=truth[param]
-        print '%7s' % param, '%.2f' % t, ' '.join(['%.2f' % s for s in summary[param]])
+        print('%7s' % param, '%.2f' % t, ' '.join(['%.2f' % s for s in summary[param]]))
 
-    print '****Global log-evidence is %f' % Zg
+    print('****Global log-evidence is %f' % Zg)
 
     return summary
 
@@ -188,11 +188,11 @@ def printLaTeX(parameters, statsDict, dump=None):
         if dump is not None:
             out.write('%s\n' % line)
         else:
-            print line
+            print(line)
 
     if dump is not None:
         out.close()
-        print '\n-> writing summary stats to \input{%s}' % outf
+        print('\n-> writing summary stats to \input{%s}' % outf)
 
     return
 

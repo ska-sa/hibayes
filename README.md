@@ -54,7 +54,7 @@ feel free to plug in your own sampler, MCMC or otherwise.
 
 ## Software requirements
 
-- python 2.7.x
+- python 2.7.x or 3.x
 - MPI (optional)
 - mpi4py
 - [multinest](http://ccpforge.cse.rl.ac.uk/gf/project/multinest)
@@ -141,7 +141,7 @@ reconstructed spectra and has dimensions ```nsamp x nfreqs```.
 
 ## Citations
 
-Use of this code should be cited as Zwart et al. 2016 (ASCL):
+Use of this code should be cited as [Zwart et al. 2016 (ASCL)](https://ui.adsabs.harvard.edu/abs/2016ascl.soft06004Z/abstract):
 
 ```
 @MISC{2016ascl.soft06004Z,
@@ -153,13 +153,13 @@ howpublished = {Astrophysics Source Code Library},
     month = jun,
 archivePrefix = "ascl",
    eprint = {1606.004},
-   adsurl = {http://adsabs.harvard.edu/abs/2016ascl.soft06004Z},
+   adsurl = {http://ui.adsabs.harvard.edu/abs/2016ascl.soft06004Z},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
 ```
 
 The algorithm, applied to both simulated and LEDA data, is described
-in Bernardi et al. 2016 (MNRAS accepted):
+in [Bernardi et al. 2016 (MNRAS)](https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.2847B/abstract):
 
 ```
 @ARTICLE{2016arXiv160606006B,
@@ -173,7 +173,7 @@ archivePrefix = "arXiv",
  keywords = {Astrophysics - Cosmology and Nongalactic Astrophysics},
      year = 2016,
     month = jun,
-   adsurl = {http://adsabs.harvard.edu/abs/2016arXiv160606006B},
+   adsurl = {http://ui.adsabs.harvard.edu/abs/2016arXiv160606006B},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
 ```

@@ -172,14 +172,14 @@ def contourTri(chain, **kwargs):
     ROTATION = 60.0
     FIGSIZE = (8.27, 11.69);
     DPI = 400
-    AXIS_LABEL_OFFSET = -0.6
+    AXIS_LABEL_OFFSET = -0.9
 
     # !!!! BEWARE THE BINSIZE --- PLOT IS A STRONG FUNCTION OF THIS
     if 'binsize' in kwargs:
         binsize = kwargs['binsize']
     else:
         binsize = 50
-    print 'Using binsize = %i' % binsize
+    print('Using binsize = %i' % binsize)
 
     if 'labels' in kwargs:
         labels = kwargs['labels']
@@ -286,7 +286,7 @@ def contourTri(chain, **kwargs):
         # Set the axis labels only for left and bottom:
         #print ax[ipanel].get_xlabel(),ax[ipanel].get_ylabel()
         if panel[1] == (nparams - 1):
-            ax[ipanel].set_xlabel(labelDict[labels[panel[0]]], fontsize=8)
+            ax[ipanel].set_xlabel(labelDict[labels[panel[0]]], fontsize=6)
             ax[ipanel].xaxis.set_label_coords(0.5, AXIS_LABEL_OFFSET)  # align axis labels
             x_formatter = matplotlib.ticker.ScalarFormatter(useOffset=False)
             ax[ipanel].xaxis.set_major_formatter(x_formatter)
@@ -294,7 +294,7 @@ def contourTri(chain, **kwargs):
             ax[ipanel].set_xlabel('')
             ax[ipanel].get_xaxis().set_ticklabels([])
         if panel[0] == 0:
-            ax[ipanel].set_ylabel(labelDict[labels[panel[1]]], fontsize=8)
+            ax[ipanel].set_ylabel(labelDict[labels[panel[1]]], fontsize=6)
             ax[ipanel].yaxis.set_label_coords(AXIS_LABEL_OFFSET, 0.5)  # align axis labels
             y_formatter = matplotlib.ticker.ScalarFormatter(useOffset=False)
             ax[ipanel].yaxis.set_major_formatter(y_formatter)
@@ -338,10 +338,10 @@ def contourTri(chain, **kwargs):
             pylab.axvline(truth[parameters[iparam]], color='r')
 
         if iparam == 0:
-            ax1d.set_ylabel(labelDict[labels[iparam]], fontsize=8)
+            ax1d.set_ylabel(labelDict[labels[iparam]], fontsize=6)
             ax1d.yaxis.set_label_coords(AXIS_LABEL_OFFSET, 0.5)  # align axis labels
         if iparam == (nparams - 1):
-            ax1d.set_xlabel(labelDict[labels[iparam]], fontsize=8)
+            ax1d.set_xlabel(labelDict[labels[iparam]], fontsize=6)
             ax1d.xaxis.set_label_coords(0.5, AXIS_LABEL_OFFSET)  # align axis labels
 
         # Set plot limits
@@ -392,12 +392,12 @@ def contourTri(chain, **kwargs):
             median_bins = medianArray(reconstruct[0])
             dnds = calculateDnByDs(median_bins, reconstruct[1])
             dndsN = calculateDnByDs(median_bins, ksNoisy)
-            print median_bins
-            print dnds
-            print truth.items()
+            print(median_bins)
+            print(dnds)
+            print(truth.items())
             recon = numpy.zeros(numpy.shape(median_bins))
             post = numpy.zeros(numpy.shape(median_bins))
-            print '# i Smedian ks dnds dndsS2.5 NRecon dndsRecon dndsS2.5Recon log10dnds log10dndsR diffR dndsN'
+            print('# i Smedian ks dnds dndsS2.5 NRecon dndsRecon dndsS2.5Recon log10dnds log10dndsR diffR dndsN')
             if nparams == 4:
                 (C, alpha, Smin, Smax) \
                     = (truth['C'], truth['alpha'], truth['Smin'], truth['Smax'])
@@ -416,13 +416,13 @@ def contourTri(chain, **kwargs):
                 # cols: i Smedian ks dnds dndsS2.5 NRecon dndsRecon
                 # dndsS2.5Recon log10dnds log10dndsR diffR dndsN
                 for i in range(len(median_bins)):
-                    print '%i %f %i %i %i %i %i %i %f %f %i %i' % (i, median_bins[i], \
+                    print('%i %f %i %i %i %i %i %i %f %f %i %i' % (i, median_bins[i], \
                                                                    reconstruct[-1][i], dnds[i], \
                                                                    dnds[i] * median_bins[i] ** 2.5, recon[i], dndsR[i], \
                                                                    dndsR[i] * median_bins[i] ** 2.5,
                                                                    numpy.log10(dnds[i]), \
                                                                    numpy.log10(dndsR[i]), int(dndsR[i] - dnds[i]),
-                                                                   dndsN[i])
+                                                                   dndsN[i]))
 
                     #print recon
             pylab.xlim(reconstruct[0][0], reconstruct[0][-1])
@@ -444,7 +444,7 @@ def contourTri(chain, **kwargs):
             os.mkdir(os.path.split(outfile)[0])
 
         pylab.savefig(outfile, figsize=FIGSIZE, dpi=DPI)
-        print 'Run: open %s' % outfile
+        print('Run: open %s' % outfile)
         #pylab.close()
     else:
         pylab.show()

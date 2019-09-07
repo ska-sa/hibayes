@@ -32,9 +32,9 @@ from hibayes.parse_config import parse_config
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print 'usage:'
-        print './hi_recon.py config_filename.ini'
-        print
+        print('usage:')
+        print('./hi_recon.py config_filename.ini')
+        print()
         sys.exit(0)
 
 param_file = sys.argv[-1]
@@ -57,7 +57,7 @@ def main():
     """
 
     # Import the settings variables
-    print 'Settings file is %s' % param_file
+    print('Settings file is %s' % param_file)
 
     if rp["ledaSpec"] is None:
         data, freqs = generate_simulated_data(rp)
@@ -92,7 +92,7 @@ def main():
     drawmap = summary[-(ncols + 1):-2]
 
     if False:
-        print '--> Calculating *ML* reconstruction'
+        print('--> Calculating *ML* reconstruction')
         drawmap = drawml
 
     # Convert drawmap into correct units etc.
@@ -101,7 +101,7 @@ def main():
         ymap[ifreq] = recon_func(freq, drawmap=drawmap,fr_1=rp["nu_1"], subtractValue=data[ifreq])
     #ymap=ff(freqs,drawmap=drawmap,fr_1=nu_1)
 
-    for isamp in xrange(nsamp):
+    for isamp in range(nsamp):
         #z[isamp,ncols-1:]=ff(freqs,drawmap=z[isamp,:],fr_1=nu_1)
         for ifreq, freq in enumerate(freqs):
             z[isamp, ncols - 1 + ifreq] = recon_func(freq, drawmap=z[isamp, :],fr_1=rp["nu_1"], subtractValue=data[ifreq])
@@ -115,14 +115,14 @@ def main():
     recons = z[:, ncols - 1:]
     hdr=' '.join(map(str,freqs))
     numpy.savetxt(reconf, recons, header=hdr)
-    print '-> Writing raw reconstructions to %s'%reconf
+    print('-> Writing raw reconstructions to %s'%reconf)
 
     # Generate stats here...
     s = numpy.zeros((nfreqs, 6))
     s[:, 0] = freqs
 
     #print '# ibin flux fit low high dlower dupper skew kurtosis'
-    for ibin in xrange(nfreqs):
+    for ibin in range(nfreqs):
         x = recons[:, ibin]
         # Remove NaNs from stats vectors
         # http://stackoverflow.com/questions/11620914/removing-nan-values-from-an-array
@@ -149,8 +149,8 @@ def main():
     rstatsf = os.path.join(rp["outdir"], rstatsf)
     hdr = 'freq_MHz T_K T_K_lower T_K_upper skewness kurtosis'
     numpy.savetxt(rstatsf, s, header=hdr)
-    print '-> Writing reconstructed spectrum to %s' % rstatsf
-    print 'Finished.'
+    print('-> Writing reconstructed spectrum to %s' % rstatsf)
+    print('Finished.')
 
     return 0
 

@@ -25,9 +25,9 @@ from hibayes.utils import *
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print 'usage:'
-        print './hi_plot.py config_filename.ini'
-        print
+        print('usage:')
+        print('./hi_plot.py config_filename.ini')
+        print()
         sys.exit(0)
 
 param_file = sys.argv[-1]
@@ -43,7 +43,7 @@ def main():
     """
     """
 
-    print 'Settings file is %s' % param_file
+    print('Settings file is %s' % param_file)
 
     # Insert custom tweaks here e.g.
     #rp["plotRanges"]['C']=[0,200]

@@ -4,8 +4,11 @@
 Functions for parsing a .ini formatted configuration file
 
 """
-
-from ConfigParser import SafeConfigParser
+import six
+if six.PY2:
+    from ConfigParser import SafeConfigParser
+else:
+    from configparser import ConfigParser
 import os
 
 #-------------------------------------------------------------------------------
@@ -20,7 +23,10 @@ def parse_config(filename):
         confdict (dict): Python dictionary of runtime parameters, as generated from config file.
     """
 
-    config = SafeConfigParser()
+    if six.PY2:
+        config = SafeConfigParser()
+    else:
+        config = ConfigParser(comment_prefixes=('#', ';'), inline_comment_prefixes=('#', ';'))
     config.read(filename)
 
     confdict = {}
@@ -38,16 +44,20 @@ def parse_config(filename):
     #-------------------------------------------------------------------------------
 
     # Data/simulation parameters
-    if config.getboolean("simulation", "simulate_sky"):
+    if config.getboolean("simulation", "simulate_sky") is True:
+        print("Using simulated spectrum...")
         confdict["ledaFreqs"] = None
         confdict["ledaSpec"] = None
         confdict["spectrum_errors"] = None
         confdict["coeffs"] = [float(i) for i in config.get("simulation","coeffs").split(",")]
         confdict["ncoeffs"] = len(confdict["coeffs"])
+        c       = confdict["coeffs"]
     else:
+        print("Using Real spectrum...")
         confdict["ledaFreqs"] = config.get("file", "frequency")
         confdict["ledaSpec"]  = config.get("file", "spectrum")
         confdict["spectrum_errors"] = config.get("file", "spectrum_errors")
+        confdict["ncoeffs"] = confdict["nc_fit"] + 3
 
     confdict["seed_SIM"]      = config.getint("simulation", "seed")
     confdict["A_HI_TRUE"]     = config.getfloat("simulation", "A_HI_TRUE")
@@ -76,9 +86,9 @@ def parse_config(filename):
     confdict["BP_PRIOR_RANGE"] = config.getfloat("priors", "BP_PRIOR_RANGE")
 
     #-------------------------------------------------------------------------------
-    nc_fit = confdict["nc_fit"]
+    nc_fit  = confdict["nc_fit"]
     ncoeffs = confdict["ncoeffs"]
-    c = confdict["coeffs"]
+    
 
     # Set up joint parameters
     confdict["parameters"] = ['A_HI', 'NU_HI', 'SIGMA_HI'] + ['p%i' % ic for ic in range(nc_fit)]

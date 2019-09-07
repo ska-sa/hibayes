@@ -23,9 +23,10 @@ if True:
     else:
         freqs = numpy.genfromtxt(rp["ledaFreqs"])
         Tmeas = numpy.genfromtxt(rp["ledaSpec"])
+        errors = numpy.genfromtxt(rp["spectrum_errors"])
         FREQ_MIN = freqs[0]
         FREQ_MAX = freqs[-1]
-
+        
 #-------------------------------------------------------------------------------
 
 pri = Priors()
